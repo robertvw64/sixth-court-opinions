@@ -46,7 +46,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@://github.com"
-          git add downloads/ index.html
+          git add opinions/ index.html
           git commit -m "Automated update: Court files and browser index" || echo "No changes to commit"
           git push
 
