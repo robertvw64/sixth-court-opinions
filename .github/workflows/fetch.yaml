@@ -3,7 +3,7 @@ name: Fetch Sixth Court opinions
 on:
   schedule:
     # Weekdays at 23:30 UTC (6:30 pm Central daylight / 5:30 pm standard time)
-    - cron: "30 23 * * 1-5"
+    - cron: "0 16 * * 1-5"
   workflow_dispatch:
     inputs:
       date:
