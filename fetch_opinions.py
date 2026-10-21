@@ -7,7 +7,7 @@ https://search.txcourts.gov/DocketSrch.aspx?coa=coa06 this script opens the
 lists (Civil Causes Decided, Civil Orders, Criminal Causes Decided, Criminal
 Orders) and saves them to:
 
-    opinions/Orders and Opinions for <Month D, YYYY>/
+    opinions/mm_dd_yyyy/
 
 along with an index.md describing each case. Dates whose folder already exists
 are skipped, so the script is safe to run repeatedly.
@@ -48,7 +48,7 @@ def get(url):
 
 def folder_name(date_str):
     d = datetime.strptime(date_str, "%m/%d/%Y")
-    return f"Orders and Opinions for {d.strftime('%B')} {d.day}, {d.year}"
+    return d.strftime("%m_%d_%Y")
 
 
 def listed_dates(html):
