@@ -29,6 +29,30 @@ jobs:
           else
             python fetch_opinions.py
           fi
+      - name: Generate File Index for Browser
+        run: |
+          echo "<html><head><title>Downloaded Court Files</title></head><body>" > index.html
+          echo "<h1>Court Documents Index</h1><ul>" >> index.html
+          
+          # Loop through files in your download folder (change 'downloads' to your actual folder name)
+          for file in opinions/*; do
+            if [ -f "$file" ]; then
+              # Get just the filename without the folder path
+              filename=$(basename "$file")
+              echo "<li><a href=\"opinions/$filename\">$filename</a></li>" >> index.html
+            fi
+          done
+          
+          echo "</ul></body></html>" >> index.html
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@://github.com"
+          git add downloads/ index.html
+          git commit -m "Automated update: Court files and browser index" || echo "No changes to commit"
+          git push
+
       - name: Commit new files
         run: |
           git config user.name "github-actions[bot]"
