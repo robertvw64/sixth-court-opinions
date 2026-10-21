@@ -33,16 +33,13 @@ jobs:
         run: |
           echo "<html><head><title>Downloaded Court Files</title></head><body>" > index.html
           echo "<h1>Court Documents Index</h1><ul>" >> index.html
-          
-          # Loop through files in your download folder (change 'downloads' to your actual folder name)
-          for file in opinions/*; do
-            if [ -f "$file" ]; then
-              # Get just the filename without the folder path
-              filename=$(basename "$file")
-              echo "<li><a href=\"opinions/$filename\">$filename</a></li>" >> index.html
-            fi
-          done
-          
+
+          while IFS= read -r file; do
+            rel_path="${file#./}"
+            label="${rel_path#opinions/}"
+            echo "<li><a href=\"${rel_path}\">${label}</a></li>" >> index.html
+          done < <(find opinions -type f | sort)
+
           echo "</ul></body></html>" >> index.html
 
       - name: Commit and Push Changes
