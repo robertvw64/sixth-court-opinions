@@ -1,0 +1,10 @@
+Summarize the attached ruling for the Daily Brief.
+
+- File: {pdf_filename}
+- Court: {court_name}
+- Release date: {release_date}
+- Run ID: {run_id} (for logs only; don't put it in the entry)
+
+The file was uploaded into your code-execution environment. If it isn't in the working directory, search the environment for "{pdf_filename}" before reporting an error.
+
+Return the JSON entry as described in the skill's json-contract.md, ending with the fenced json block.
